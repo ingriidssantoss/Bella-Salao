@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel - Salão Bella</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="painel-container">
+        <div id="feedback-message" class="feedback-message" style="display:none;"></div>
+
+        <header>
+            <h1>Salão Bella</h1>
+            <div>
+                <button onclick="toggleDarkMode()">🌙 Modo</button>
+                <button onclick="logout()">Sair</button>
+            </div>
+        </header>
+
+        <nav>
+            <button onclick="mostrar('cadastroCliente')">Cadastrar Cliente</button>
+            <button onclick="mostrar('cadastroAgendamento')">Novo Agendamento</button>
+            <button onclick="mostrar('listarAgendamentos')">Ver Agendamentos</button>
+            <button onclick="mostrar('listarClientes')">Ver Clientes</button>
+            <button onclick="exportarTXT()">Exportar Agenda TXT</button>
+            <button id="gerenciarUsuariosBtn" onclick="mostrar('gerenciarUsuarios')">Gerenciar Usuários</button>
+            <button id="ferramentasAdminBtn" onclick="mostrar('ferramentasAdmin')">Ferramentas Admin</button>
+        </nav>
+
+        <main>
+            <section id="cadastroCliente">
+                <h2>Cadastrar/Editar Cliente</h2>
+                <input type="text" id="nomeCliente" placeholder="Nome do Cliente">
+                <input type="tel" id="telefoneCliente" placeholder="Telefone (somente números)" pattern="[0-9]{8,15}" inputmode="numeric">
+                <p id="erroCliente" class="erro-msg"></p>
+                <button onclick="cadastrarCliente()">Cadastrar</button>
+            </section>
+
+            <section id="cadastroAgendamento" style="display:none;">
+                <h2>Novo/Editar Agendamento</h2>
+                <label for="selectCliente">Cliente:</label>
+                <select id="selectCliente"></select>
+                <label for="data">Data:</label>
+                <input type="date" id="data">
+                <label for="hora">Hora:</label>
+                <input type="time" id="hora">
+                <label for="servico">Serviço:</label>
+                <select id="servico">
+                    <option value="">Selecione</option>
+                    <option value="Corte de Cabelo">Corte de Cabelo</option>
+                    <option value="Escova">Escova</option>
+                    <option value="Coloração">Coloração</option>
+                    <option value="Hidratação">Hidratação</option>
+                    <option value="Manicure">Manicure</option>
+                    <option value="Pedicure">Pedicure</option>
+                    <option value="Sobrancelha">Sobrancelha</option>
+                    <option value="Barba">Barba</option>
+                </select>
+                <button onclick="cadastrarAgendamento()">Agendar</button>
+            </section>
+
+            <section id="listarAgendamentos" style="display:none;">
+                <h2>Agendamentos</h2>
+                <div id="tabelaAgendamentos"></div>
+            </section>
+
+            <section id="listarClientes" style="display:none;">
+                <h2>Clientes Cadastrados</h2>
+                <div id="tabelaClientes"></div>
+            </section>
+
+            <section id="gerenciarUsuarios" style="display:none;">
+                <h2>Gerenciar Usuários</h2>
+                <div class="user-form">
+                    <h3>Cadastrar Novo Usuário</h3>
+                    <input type="text" id="usernameNovoUsuario" placeholder="Nome de Usuário">
+                    <input type="password" id="passwordNovoUsuario" placeholder="Senha">
+                    <p id="erroNovoUsuario" class="erro-msg"></p>
+                    <button onclick="cadastrarNovoUsuario()">Cadastrar Usuário</button>
+                </div>
+                <h3>Usuários Existentes</h3>
+                <div id="tabelaUsuarios"></div>
+            </section>
+
+            <section id="ferramentasAdmin" style="display:none;">
+                <h2>Ferramentas do Administrador</h2>
+                <p>Use essas ferramentas com cautela. Elas são destinadas à manutenção do sistema.</p>
+                <button onclick="resetarDados()" class="btn-perigo">Resetar Todos os Dados</button>
+                <p class="small-text">Esta ação apagará todos os clientes, agendamentos E USUÁRIOS salvos no seu navegador, restaurando apenas o usuário "admin" padrão.</p>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
